@@ -3,8 +3,13 @@ package bootstrap
 
 import (
 	"github.com/sev-2/raiden/pkg/resource"
+	"medpoinraiden/internal/roles"
 )
 
 func RegisterRoles() {
-	resource.RegisterRole()
+	resource.RegisterRole(
+		&roles.Admin{},
+		&roles.Dokter{},
+		&roles.User1{},
+	)
 }

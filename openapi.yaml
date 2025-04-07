@@ -1,0 +1,349 @@
+openapi: 3.0.0
+info:
+  title: API Documentation for Klinik App
+  version: 1.0.0
+servers:
+  - url: https://jsmnunsfyawhceethegc.supabase.co/rest/v1
+    description: Supabase REST API
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  /auth/v1/token:
+    post:
+      tags:
+        - Auth
+      summary: Login with email and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successful login
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+
+  /dokter:
+    get:
+      tags:
+        - Dokter
+      summary: Get list of all doctors (All roles)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+    post:
+      tags:
+        - Dokter
+      summary: Create new dokter (Admin/Super Admin only)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nama:
+                  type: string
+                spesialis:
+                  type: string
+                no_str:
+                  type: string
+                image_url:
+                  type: string
+      responses:
+        '201':
+          description: Dokter created
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+
+  /dokter/{id}:
+    patch:
+      tags:
+        - Dokter
+      summary: Update dokter data (Admin/Super Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nama:
+                  type: string
+                spesialis:
+                  type: string
+                no_str:
+                  type: string
+                image_url:
+                  type: string
+      responses:
+        '200':
+          description: Dokter updated
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+        - Dokter
+      summary: Delete dokter by ID (Admin/Super Admin)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Dokter deleted
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+
+  /jadwal_dokter:
+    get:
+      tags:
+        - Jadwal Dokter
+      summary: Get list of all jadwal dokter (All roles)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+    post:
+      tags:
+        - Jadwal Dokter
+      summary: Create new jadwal dokter (Admin/Super Admin only)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dokter_id:
+                  type: string
+                hari:
+                  type: string
+                jam_mulai:
+                  type: string
+                jam_selesai:
+                  type: string
+      responses:
+        '201':
+          description: Jadwal dokter created
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+
+  /jadwal_dokter/{id}:
+    patch:
+      tags:
+        - Jadwal Dokter
+      summary: Update jadwal dokter (Admin/Super Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dokter_id:
+                  type: string
+                hari:
+                  type: string
+                jam_mulai:
+                  type: string
+                jam_selesai:
+                  type: string
+      responses:
+        '200':
+          description: Jadwal dokter updated
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+        - Jadwal Dokter
+      summary: Delete jadwal dokter (Admin/Super Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Jadwal dokter deleted
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+
+  /pasien:
+    get:
+      tags:
+        - Pasien
+      summary: Get list of all pasien (Admin/Super Admin only)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+    post:
+      tags:
+        - Pasien
+      summary: Create new pasien (Admin/Super Admin only)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nama:
+                  type: string
+                email:
+                  type: string
+                no_hp:
+                  type: string
+      responses:
+        '201':
+          description: Pasien created
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+
+  /pasien/{id}:
+    patch:
+      tags:
+        - Pasien
+      summary: Update pasien (Admin/Super Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nama:
+                  type: string
+                email:
+                  type: string
+                no_hp:
+                  type: string
+      responses:
+        '200':
+          description: Pasien updated
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+        - Pasien
+      summary: Delete pasien (Admin/Super Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Pasien deleted
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error

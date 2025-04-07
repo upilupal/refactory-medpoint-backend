@@ -3,8 +3,17 @@ package bootstrap
 
 import (
 	"github.com/sev-2/raiden/pkg/resource"
+	"medpoinraiden/internal/models"
 )
 
 func RegisterModels() {
-	resource.RegisterModels()
+	resource.RegisterModels(
+		&models.Dokter{},
+		&models.JadwalDokter{},
+		&models.Kunjungan{},
+		&models.Pasien{},
+		&models.Pembayaran{},
+		&models.Reservasi{},
+		&models.Spesialisasi{},
+	)
 }

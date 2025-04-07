@@ -5,10 +5,67 @@ import (
 	"github.com/sev-2/raiden"
 	raiden_controllers "github.com/sev-2/raiden/pkg/controllers"
 	"github.com/valyala/fasthttp"
+	rest_v1_dokter "medpoinraiden/internal/controllers/rest/v1/dokter"
+	rest_v1_jadwal_dokter "medpoinraiden/internal/controllers/rest/v1/jadwal_dokter"
+	rest_v1_kunjungan "medpoinraiden/internal/controllers/rest/v1/kunjungan"
+	rest_v1_pasien "medpoinraiden/internal/controllers/rest/v1/pasien"
+	rest_v1_pembayaran "medpoinraiden/internal/controllers/rest/v1/pembayaran"
+	rest_v1_reservasi "medpoinraiden/internal/controllers/rest/v1/reservasi"
+	rest_v1_spesialisasi "medpoinraiden/internal/controllers/rest/v1/spesialisasi"
+	"medpoinraiden/internal/models"
 )
 
 func RegisterRoute(server *raiden.Server) {
 	server.RegisterRoute([]*raiden.Route{
 		raiden.NewRouteFromController(&raiden_controllers.StateReadyController{}, []string{fasthttp.MethodPost}),
+		{
+			Type:       raiden.RouteTypeRest,
+			Path:       "/rest/v1/dokter",
+			Methods:    []string{},
+			Controller: &rest_v1_dokter.RestController{},
+			Model:      models.Dokter{},
+		},
+		{
+			Type:       raiden.RouteTypeRest,
+			Path:       "/rest/v1/jadwal-dokter",
+			Methods:    []string{},
+			Controller: &rest_v1_jadwal_dokter.RestController{},
+			Model:      models.JadwalDokter{},
+		},
+		{
+			Type:       raiden.RouteTypeRest,
+			Path:       "/rest/v1/kunjungan",
+			Methods:    []string{},
+			Controller: &rest_v1_kunjungan.RestController{},
+			Model:      models.Kunjungan{},
+		},
+		{
+			Type:       raiden.RouteTypeRest,
+			Path:       "/rest/v1/pasien",
+			Methods:    []string{},
+			Controller: &rest_v1_pasien.RestController{},
+			Model:      models.Pasien{},
+		},
+		{
+			Type:       raiden.RouteTypeRest,
+			Path:       "/rest/v1/pembayaran",
+			Methods:    []string{},
+			Controller: &rest_v1_pembayaran.RestController{},
+			Model:      models.Pembayaran{},
+		},
+		{
+			Type:       raiden.RouteTypeRest,
+			Path:       "/rest/v1/reservasi",
+			Methods:    []string{},
+			Controller: &rest_v1_reservasi.RestController{},
+			Model:      models.Reservasi{},
+		},
+		{
+			Type:       raiden.RouteTypeRest,
+			Path:       "/rest/v1/spesialisasi",
+			Methods:    []string{},
+			Controller: &rest_v1_spesialisasi.RestController{},
+			Model:      models.Spesialisasi{},
+		},
 	})
 }

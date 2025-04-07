@@ -3,8 +3,29 @@ package bootstrap
 
 import (
 	"github.com/sev-2/raiden/pkg/resource"
+	"medpoinraiden/internal/types"
 )
 
 func RegisterTypes() {
-	resource.RegisterTypes()
+	resource.RegisterTypes(
+		&types.JenisKelamin{},
+		&types.MetodePembayaran{},
+		&types.StatusAktif{},
+		&types.StatusKunjungan{},
+		&types.StatusPembayaran{},
+		&types.StatusReservasi{},
+		&types.Dokter{},
+		&types.JadwalDokter{},
+		&types.JenisKelamin{},
+		&types.Kunjungan{},
+		&types.MetodePembayaran{},
+		&types.Pasien{},
+		&types.Pembayaran{},
+		&types.Reservasi{},
+		&types.Spesialisasi{},
+		&types.StatusAktif{},
+		&types.StatusKunjungan{},
+		&types.StatusPembayaran{},
+		&types.StatusReservasi{},
+	)
 }
